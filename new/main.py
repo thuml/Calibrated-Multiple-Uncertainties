@@ -181,10 +181,10 @@ def train(train_source_iter: ForeverDataIterator, train_target_iter: ForeverData
 
         with torch.no_grad():
             yt_1, yt_2, yt_3, yt_4, yt_5 = esem(f_t)
-            confidece = get_confidence(yt_1, yt_2, yt_3, yt_4, yt_5)
+            confidence = get_confidence(yt_1, yt_2, yt_3, yt_4, yt_5)
             entropy = get_entropy(yt_1, yt_2, yt_3, yt_4, yt_5)
             consistency = get_consistency(yt_1, yt_2, yt_3, yt_4, yt_5)
-            w_t = (1 - entropy + 1 - consistency + confidece) / 3
+            w_t = (1 - entropy + 1 - consistency + confidence) / 3
             w_s = torch.tensor([source_class_weight[i] for i in labels_s]).to(device)
 
         cls_loss = F.cross_entropy(y_s, labels_s)

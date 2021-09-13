@@ -161,7 +161,7 @@ class DomainAdversarialLoss(nn.Module):
         d_label_t = torch.zeros((f_t.size(0), 1)).to(f_t.device)
         self.domain_discriminator_accuracy = 0.5 * (binary_accuracy(d_s, d_label_s) + binary_accuracy(d_t, d_label_t))
         source_loss = torch.mean(w_s * self.bce(d_s, d_label_s).view(-1))
-        target_loss = torch.mean(w_s * self.bce(d_t, d_label_t).view(-1))
+        target_loss = torch.mean(w_t * self.bce(d_t, d_label_t).view(-1))
         return 0.5 * (source_loss + target_loss)
 
 
